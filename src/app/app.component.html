@@ -1,0 +1,62 @@
+<div *ngIf="mobiles;else err" class="container">
+  <div class="header">
+    <h2>Manage mobiles</h2>
+    <button class="btn btn-success" (click)="openForm()">Add mobile</button>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Mobile</th>
+      <th>Price</th>
+      <th>Ram</th>
+      <th>Storage</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr *ngFor="let mobile of mobiles">
+      <td>{{mobile.name}}</td>
+      <td>{{mobile.price}}</td>
+      <td>{{mobile.ram}}</td>
+      <td>{{mobile.storage}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="openForm(mobile)">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="delete(mobile.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="showForm" class="form-wrapper">
+  <div class="form-border">
+    <h2>{{formHeader}}</h2>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="formModel.name">
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" id="price" [(ngModel)]="formModel.price">
+    </div>
+    <div class="form-group">
+      <label for="ram">Ram</label>
+      <input type="number" class="form-control" id="ram" [(ngModel)]="formModel.ram">
+    </div>
+    <div class="form-group">
+      <label for="storage">Storage</label>
+      <input type="number" class="form-control" id="storage" [(ngModel)]="formModel.storage">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideForm()">Close</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #err>
+  <p>Error load data</p>
+</ng-template>
