@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import {MobileService} from "./mobile.service";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {NavigationComponent} from "./navigation.component";
+import {NavigationComponent} from "./navigation/navigation.component";
 import {RoutingModule} from "./routing.module";
+
+import {PositionComponent} from './position/position.component';
+import {PositionService} from "./position/position.service";
+import {TeamComponent} from "./team/team.component";
+import {TeamService} from "./team/team.service";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    TeamComponent,
+    PositionComponent,
     NavigationComponent
   ],
   imports: [
@@ -19,7 +22,11 @@ import {RoutingModule} from "./routing.module";
     FormsModule,
     RoutingModule
   ],
-  providers: [MobileService],
+  providers: [
+    PositionService,
+    TeamService
+  ],
   bootstrap: [NavigationComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

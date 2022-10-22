@@ -1,15 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {AppComponent} from "./app.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {TeamComponent} from "./team/team.component";
+import {PositionComponent} from "./position/position.component";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'user', component: AppComponent },
+  {path: '', redirectTo: 'team', pathMatch: 'full'},
+  {path: 'team', component: TeamComponent},
+  {path: 'position', component: PositionComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class RoutingModule { }
+export class RoutingModule {
+}
