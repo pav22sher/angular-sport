@@ -11,7 +11,6 @@ export class TeamComponent implements OnInit{
   constructor(private service: TeamService) {
   }
   teams:TeamModel[] = [];
-  formHeader: string = "Команда";
   showForm: boolean = false;
   formModel: TeamModel = new TeamModel();
 

@@ -1,6 +1,6 @@
-<div *ngIf="positions;else err" class="container">
+<div *ngIf="roles;else err" class="container">
   <div class="header">
-    <h2>Позиции игроков</h2>
+    <h2>Роли</h2>
     <button class="btn btn-success" (click)="openForm()">Добавить</button>
   </div>
   <table class="table">
@@ -13,14 +13,14 @@
     </tr>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let position of positions">
-      <td>{{position.id}}</td>
-      <td>{{position.name}}</td>
+    <tr *ngFor="let role of roles">
+      <td>{{role.id}}</td>
+      <td>{{role.name}}</td>
       <td>
-        <button class="btn btn-primary" (click)="openForm(position)">Редактировать</button>
+        <button class="btn btn-primary" (click)="openForm(role)">Редактировать</button>
       </td>
       <td>
-        <button class="btn btn-danger" (click)="delete(position.id)">Удалить</button>
+        <button class="btn btn-danger" (click)="delete(role.id)">Удалить</button>
       </td>
     </tr>
     </tbody>
@@ -29,7 +29,7 @@
 
 <div *ngIf="showForm" class="form-wrapper">
   <div class="form-border">
-    <h2>Позиция игрока</h2>
+    <h2>Игрок</h2>
     <input type="hidden" id="id" name="id"/>
     <div class="form-group">
       <label for="name">Название</label>

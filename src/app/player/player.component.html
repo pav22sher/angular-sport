@@ -1,0 +1,95 @@
+<div *ngIf="players;else err" class="container">
+  <div class="header">
+    <h2>Игроки</h2>
+    <button class="btn btn-success" (click)="openForm()">Добавить</button>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Email</th>
+      <th>Рейтинг</th>
+      <th>Команда</th>
+      <th>Роль</th>
+      <th>Позиция</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr *ngFor="let player of players">
+      <td>{{player.id}}</td>
+      <td>{{player.lastName}}</td>
+      <td>{{player.firstName}}</td>
+      <td>{{player.secondName}}</td>
+      <td>{{player.email}}</td>
+      <td>{{player.rating}}</td>
+      <td>{{player.teamName}}</td>
+      <td>{{player.roleName}}</td>
+      <td>{{player.positionName}}</td>
+      <td>
+        <button class="btn btn-primary" (click)="openForm(player)">Редактировать</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="delete(player.id)">Удалить</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="showForm" class="form-wrapper">
+  <div class="form-border">
+    <h2>Игрок</h2>
+    <input type="hidden" id="id" name="id"/>
+    <div class="form-group">
+      <label for="lastName">Фамилия</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="formModel.lastName">
+    </div>
+    <div class="form-group">
+      <label for="firstName">Имя</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="formModel.firstName">
+    </div>
+    <div class="form-group">
+      <label for="secondName">Отчество</label>
+      <input type="text" class="form-control" id="secondName" [(ngModel)]="formModel.secondName">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="formModel.email">
+    </div>
+    <div class="form-group">
+      <label for="rating">Рейтинг</label>
+      <input type="number" class="form-control" id="rating" [(ngModel)]="formModel.rating">
+    </div>
+    <div class="form-group">
+      <label for="team">Команда</label>
+      <select class="form-select" id="team" [(ngModel)]="formModel.teamId">
+        <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="role">Роль</label>
+      <select class="form-select" id="role" [(ngModel)]="formModel.roleId">
+        <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="position">Позиция</label>
+      <select class="form-select" id="position" [(ngModel)]="formModel.positionId">
+        <option *ngFor="let position of positions" [value]="position.id">{{position.name}}</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="save()">Сохранить</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideForm()">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #err>
+  <p>Ошибка при загрузке данных</p>
+</ng-template>

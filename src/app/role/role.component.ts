@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {PositionService} from "./position.service";
-import {PositionModel} from "./position.model";
+import {RoleService} from "./role.service";
+import {RoleModel} from "./role.model";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './position.component.html',
-  styleUrls: ['./position.component.css']
+  templateUrl: './role.component.html',
+  styleUrls: ['./role.component.css']
 })
-export class PositionComponent implements OnInit {
-  constructor(private service: PositionService) {
+export class RoleComponent implements OnInit {
+  constructor(private service: RoleService) {
   }
 
-  positions: PositionModel[] = [];
+  roles: RoleModel[] = [];
   showForm: boolean = false;
-  formModel: PositionModel = new PositionModel();
+  formModel: RoleModel = new RoleModel();
 
   ngOnInit(): void {
     this.get();
@@ -23,7 +23,7 @@ export class PositionComponent implements OnInit {
     this.service.get().subscribe(
       data => {
         // @ts-ignore
-        this.positions = data
+        this.roles = data
       },
       error => {
         alert( "Ошибка" );
@@ -57,13 +57,13 @@ export class PositionComponent implements OnInit {
     )
   }
 
-  openForm(model: PositionModel = new PositionModel()) {
+  openForm(model: RoleModel = new RoleModel()) {
     this.showForm = true;
     this.formModel = model;
   }
 
   hideForm() {
     this.showForm = false;
-    this.formModel = new PositionModel();
+    this.formModel = new RoleModel();
   }
 }
