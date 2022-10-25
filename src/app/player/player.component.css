@@ -13,6 +13,10 @@
   padding: 30px;
 }
 
+.column {
+  column-count: 2
+}
+
 th {
   text-align: center;
 }

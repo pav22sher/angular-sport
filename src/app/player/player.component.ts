@@ -27,6 +27,20 @@ export class PlayerComponent implements OnInit {
   showForm: boolean = false;
   formModel: PlayerModel = new PlayerModel();
 
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 100;
+
+  firstName: string;
+  lastName: string;
+  secondName: string;
+  email: string;
+  ratingFrom: number;
+  ratingTo: number;
+  teamId: string;
+  roleId: string;
+  positionId: string;
+
   ngOnInit(): void {
     this.get();
     this.getTeams();
@@ -42,10 +56,10 @@ export class PlayerComponent implements OnInit {
     this.teamService.get(params).subscribe(
       data => {
         // @ts-ignore
-        this.teams = data
+        this.teams = data.content;
       },
       error => {
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
@@ -57,7 +71,7 @@ export class PlayerComponent implements OnInit {
         this.roles = data
       },
       error => {
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
@@ -69,19 +83,55 @@ export class PlayerComponent implements OnInit {
         this.positions = data
       },
       error => {
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
 
   get() {
-    this.playerService.get().subscribe(
+    let params: any = {};
+    if (this.firstName) {
+      params['firstName'] = this.firstName;
+    }
+    if (this.lastName) {
+      params['lastName'] = this.lastName;
+    }
+    if (this.secondName) {
+      params['secondName'] = this.secondName;
+    }
+    if (this.email) {
+      params['email'] = this.email;
+    }
+    if (this.ratingFrom) {
+      params['ratingFrom'] = this.ratingFrom;
+    }
+    if (this.ratingTo) {
+      params['ratingTo'] = this.ratingTo;
+    }
+    if (this.teamId) {
+      params['teamId'] = this.teamId;
+    }
+    if (this.roleId) {
+      params['roleId'] = this.roleId;
+    }
+    if (this.positionId) {
+      params['positionId'] = this.positionId;
+    }
+    if (this.currentPage) {
+      params['page'] = this.currentPage - 1;
+    }
+    if (this.itemsPerPage) {
+      params['size'] = this.itemsPerPage;
+    }
+    this.playerService.get(params).subscribe(
       data => {
         // @ts-ignore
-        this.players = data
+        this.players = data.content;
+        // @ts-ignore
+        this.totalItems = data.totalElements;
       },
       error => {
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
@@ -93,7 +143,7 @@ export class PlayerComponent implements OnInit {
       },
       error => {
         this.get();
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
@@ -107,7 +157,7 @@ export class PlayerComponent implements OnInit {
       error => {
         this.hideForm();
         this.get();
-        alert( "Ошибка" );
+        alert("Ошибка");
       }
     )
   }
@@ -120,5 +170,18 @@ export class PlayerComponent implements OnInit {
   hideForm() {
     this.showForm = false;
     this.formModel = new PlayerModel();
+  }
+
+  search() {
+    this.get();
+  }
+
+  report() {
+    console.log("report");
+  }
+
+  onPageChange(event: any) {
+    this.currentPage = event;
+    this.get();
   }
 }

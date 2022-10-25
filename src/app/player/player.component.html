@@ -3,6 +3,56 @@
     <h2>Игроки</h2>
     <button class="btn btn-success" (click)="openForm()">Добавить</button>
   </div>
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Панель поиска
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse in" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="column">
+            <label>Фамилия</label>
+            <input type="text" class="form-control" [(ngModel)]="lastName">
+            <label>Имя</label>
+            <input type="text" class="form-control" [(ngModel)]="firstName">
+          </div>
+          <div class="column">
+            <label>Отчество</label>
+            <input type="text" class="form-control" [(ngModel)]="secondName">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="formModel.email">
+          </div>
+          <div class="column">
+            <label for="rating">Рейтинг с</label>
+            <input type="number" class="form-control" [(ngModel)]="ratingFrom">
+            <label for="rating">Рейтинг по</label>
+            <input type="number" class="form-control" [(ngModel)]="ratingTo">
+          </div>
+
+          <label>Команда</label>
+          <select class="form-select" [(ngModel)]="teamId">
+            <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+          </select>
+          <label>Роль</label>
+          <select class="form-select" [(ngModel)]="roleId">
+            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+          </select>
+          <label>Позиция</label>
+          <select class="form-select" [(ngModel)]="positionId">
+            <option *ngFor="let position of positions" [value]="position.id">{{position.name}}</option>
+          </select>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" (click)="search()">Найти</button>
+            <button class="btn btn btn-danger" (click)="report()">Выгрузить в Excel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <table class="table">
     <thead>
     <tr>
@@ -20,7 +70,7 @@
     </tr>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let player of players">
+    <tr *ngFor="let player of players | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems}">
       <td>{{player.id}}</td>
       <td>{{player.lastName}}</td>
       <td>{{player.firstName}}</td>
@@ -39,6 +89,10 @@
     </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination-controls previousLabel="Назад" nextLabel="Вперед" (pageChange)="onPageChange($event)" >
+    </pagination-controls>
+  </div>
 </div>
 
 <div *ngIf="showForm" class="form-wrapper">
