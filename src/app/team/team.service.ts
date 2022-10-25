@@ -11,8 +11,8 @@ export class TeamService {
   constructor(private http: HttpClient) {
   }
 
-  get() {
-    return this.http.get(this.url);
+  get(params: any) {
+    return this.http.get(this.url, { params });
   }
 
   save(model: TeamModel) {

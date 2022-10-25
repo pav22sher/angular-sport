@@ -4,6 +4,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NavigationComponent} from "./navigation/navigation.component";
 import {RoutingModule} from "./routing.module";
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {PositionComponent} from './position/position.component';
 import {PositionService} from "./position/position.service";
@@ -24,7 +25,8 @@ import {RoleComponent} from "./role/role.component";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RoutingModule
+    RoutingModule,
+    NgxPaginationModule
   ],
   providers: [
     PositionService,

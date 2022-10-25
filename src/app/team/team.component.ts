@@ -14,15 +14,28 @@ export class TeamComponent implements OnInit{
   showForm: boolean = false;
   formModel: TeamModel = new TeamModel();
 
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 100;
+
   ngOnInit(): void {
     this.get();
   }
 
   get() {
-    this.service.get().subscribe(
+    let params: any = {};
+    if (this.currentPage) {
+      params['page'] = this.currentPage - 1;
+    }
+    if (this.itemsPerPage) {
+      params['size'] = this.itemsPerPage;
+    }
+    this.service.get(params).subscribe(
       data => {
         // @ts-ignore
-        this.teams = data
+        this.teams = data.content;
+        // @ts-ignore
+        this.totalItems = data.totalElements;
       },
       error => {
         alert( "Ошибка" );
@@ -64,5 +77,10 @@ export class TeamComponent implements OnInit{
   hideForm() {
     this.showForm = false;
     this.formModel = new TeamModel();
+  }
+
+  onPageChange(event: any) {
+    this.currentPage = event;
+    this.get();
   }
 }

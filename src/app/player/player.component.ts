@@ -35,7 +35,11 @@ export class PlayerComponent implements OnInit {
   }
 
   getTeams() {
-    this.teamService.get().subscribe(
+    let params: any = {};
+    //todo пока так
+    params['page'] = 0;
+    params['size'] = 100;
+    this.teamService.get(params).subscribe(
       data => {
         // @ts-ignore
         this.teams = data
