@@ -2,6 +2,7 @@
   <div class="header">
     <h2>Игроки</h2>
     <button class="btn btn-success" (click)="openForm()">Добавить</button>
+    <button class="btn btn btn-warning" (click)="report()">Выгрузить в Excel</button>
   </div>
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
@@ -45,8 +46,7 @@
           </select>
 
           <div class="modal-footer">
-            <button class="btn btn-primary" (click)="search()">Найти</button>
-            <button class="btn btn btn-danger" (click)="report()">Выгрузить в Excel</button>
+            <button class="btn btn-dark" (click)="search()">Найти</button>
           </div>
         </div>
       </div>

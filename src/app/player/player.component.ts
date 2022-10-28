@@ -177,7 +177,7 @@ export class PlayerComponent implements OnInit {
   }
 
   report() {
-    console.log("report");
+    window.open("http://localhost:8080/player/report", "_self");
   }
 
   onPageChange(event: any) {
